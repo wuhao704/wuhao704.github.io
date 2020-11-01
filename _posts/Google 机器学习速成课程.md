@@ -1,0 +1,245 @@
+---
+layout:	post
+title: Google机器学习速成课程（未完）
+subtitle:
+date: 2020-11-01
+author: 吴昊
+header-img:
+catalog: true
+tags:
+	- 机器学习
+
+---
+
+# Google 机器学习速成课程
+
+- 什么是（监督式）机器学习？
+  - 机器学习系统通过学习如何组合输入信息来对从未见过的数据做出有用的预测。
+
+---
+
+- 基本术语
+
+  - 标签：y变量，需要预测的事物
+
+  - 特征：x变量，通常为x1，x2.。。。
+
+  - 样本：
+
+    - 有标签样本
+
+      > {features, label}: (x,y)
+
+    - 无标签样本
+
+      > {features, ?}: (x, ?)
+
+  - 模型 生命周期的两个阶段
+
+    - 训练 指创建或学习模型，向模型展示有标签样本，模型逐渐学习特征和标签之间的关系
+    - 推断 指将训练后的模型应用于无标签样本
+
+  - 回归与分类
+
+    - 回归预测连续值
+    - 分类预测离散值
+
+---
+
+- 损失函数
+
+在监督式学习中，机器学习算法通过以下方式构建模型：检查多个样本并尝试找出可最大限度地减少损失的模型；这一过程称为**经验风险最小化**。
+
+损失是对糟糕预测的惩罚。也就是说，**损失**是一个数值，表示对于单个样本而言模型预测的准确程度。如果模型的预测完全准确，则损失为零，否则损失会较大。
+
+
+
+
+
+- 梯度
+
+梯度是一个矢量，因此具有大小和方向
+
+梯度始终指向损失函数中增长最为迅猛的方向，梯度下降算法会沿着幅度的方向走。
+
+
+
+
+
+- 学习速率
+
+  一维空间中的理想学习速率是 1/f(x)″（f(x) 对 x 的二阶导数的倒数）。
+
+  二维或多维空间中的理想学习速率是[海森矩阵](https://wikipedia.org/wiki/Hessian_matrix)（由二阶偏导数组成的矩阵）的倒数。
+
+  广义凸函数的情况则更为复杂。
+
+
+
+- 随机梯度下降法（SGD）
+
+
+
+---
+
+playground练习
+
+activation（激活函数）
+
+	1. sigmoid函数
+ 	2. ReLU函数
+ 	3. tanh函数
+ 	4. linear函数
+
+
+
+---
+
+tensorflow工具包层次结构
+
+ ![image-20200227131754745](../Library/Application Support/typora-user-images/image-20200227131754745.png)
+
+---
+
+tf.estimator API
+
+我们将使用 tf.estimator 来完成机器学习速成课程中的大部分练习。您在练习中所做的一切都可以在较低级别（原始）的 TensorFlow 中完成，但使用 tf.estimator 会大大减少代码行数。
+
+以下是在 tf.estimator 中实现的线性回归程序的格式：
+
+``` python
+import tensorflow as tf
+
+# Set up a linear classifier.
+classifier = tf.estimator.LinearClassifier()
+
+# Train the model on some example data.
+classifier.train(input_fn=train_input_fn, steps=2000)
+
+# Use it to predict.
+predictions = classifier.predict(input_fn=predict_input_fn)
+```
+
+
+
+
+
+---
+
+**pandas**
+
+- 大致了解 *pandas* 库的 `DataFrame` 和 `Series` 数据结构
+- 存取和处理 `DataFrame` 和 `Series` 中的数据
+- 将 CSV 数据导入 pandas 库的 `DataFrame`
+- 对 `DataFrame` 重建索引来随机打乱数据
+
+
+
+
+
+- **`DataFrame`**，您可以将它想象成一个关系型数据表格，其中包含多个行和已命名的列。
+- **`Series`**，它是单一列。`DataFrame` 中包含一个或多个 `Series`，每个 `Series` 均有一个名称。
+
+
+
+创建Series的一种方法是构建Series对象
+
+`pd.Series(['San Francisco', 'San Jose', 'Sacramento'])`
+
+
+
+通过Series构建DataFrame
+
+```python
+city_name = pd.Series(['San Francisco', 'San Jose', 'Sacramento'])
+population = pd.Series([852469, 1015785, 485199])
+
+pd.DataFrame({'City name': city_name, 'Population' : population})
+```
+
+
+
+将数据文件加载到DataFrame中
+
+```python
+california_housing_dataframe = pd.read_csv("https://download.mlcc.google.cn/mledu-datasets/california_housing_train.csv", sep=",")
+california_housing_dataframe.describe()
+
+# show the front record (.head())
+california_housing_dataframe.head()
+
+# chart  (.hist())
+california_housing_dataframe.hist('housing_median_age')
+
+```
+
+
+
+通过python dict/list 指令访问DataFrame数据
+
+```python
+cities = pd.DataFrame({ 'City name': city_names, 'Population': population })
+print(type(cities['City name']))
+cities['City name']
+
+print(type(cities['City name'][1]))
+cities['City name'][1]
+
+print(type(cities[0:2]))
+cities[0:2]
+```
+
+
+
+**numpy**
+
+pandas Series可用作大多数NumPy函数的参数
+
+
+
+
+
+---
+
+使用tensorflow的基本步骤
+
+1. 加载库
+
+   ```python
+   from __future__ import print_function
+   
+   import math
+   
+   from IPython import display
+   from matplotlib import cm
+   from matplotlib import gridspec
+   from matplotlib import pyplot as plt
+   import numpy as np
+   import pandas as pd
+   from sklearn import metrics
+   %tensorflow_version 1.x
+   import tensorflow as tf
+   from tensorflow.python.data import Dataset
+   
+   tf.logging.set_verbosity(tf.logging.ERROR)
+   pd.options.display.max_rows = 10
+   pd.options.display.float_format = '{:.1f}'.format
+   
+   
+   ```
+
+2. 加载数据集并处理
+
+   ```python
+   california_housing_dataframe = pd.read_csv("https://download.mlcc.google.cn/mledu-datasets/california_housing_train.csv", sep=",")
+   
+   #随机化处理
+   california_housing_dataframe = california_housing_dataframe.reindex(
+       np.random.permutation(california_housing_dataframe.index))
+   california_housing_dataframe["median_house_value"] /= 1000.0
+   california_housing_dataframe
+   ```
+
+3. 构建模型
+
+   1. 用到了estimator API提供的LinearRegressor接口
