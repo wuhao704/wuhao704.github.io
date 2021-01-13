@@ -1,14 +1,12 @@
 ---
 layout:	post
-title: LeetCode: 98. Validate Binary Search Tree
+title:  'LeetCode: 98. Validate Binary Search Tree'
 subtitle:
 date: 2020-04-14
 author: 吴昊
 header-img:
 catalog: true
-tags:
-	- LeetCode
-
+tags: LeetCode
 ---
 
 

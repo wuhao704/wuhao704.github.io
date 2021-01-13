@@ -1,13 +1,12 @@
 ---
 layout:	post
-title: LeetCode: 94.Binary Tree Inorder Traversal
+title: 'LeetCode: 94.Binary Tree Inorder Traversal'
 subtitle:
 date: 2020-04-14
 author: 吴昊
 header-img:
 catalog: true
-tags:
-	- LeetCode
+tags: LeetCode
 
 
 ---
