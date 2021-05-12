@@ -1,6 +1,6 @@
 ---
 layout:	post
-title: Linux/Unix多线程下载工具axel的使用
+title: 'Linux/Unix多线程下载工具axel的使用'
 subtitle:
 date: 2020-02-06
 author: 吴昊

@@ -1,6 +1,6 @@
 ---
 layout:	post
-title: LeetCode: 94.Binary Tree Inorder Traversal
+title: 'LeetCode: 94.Binary Tree Inorder Traversal'
 subtitle:
 date: 2020-04-14
 author: 吴昊

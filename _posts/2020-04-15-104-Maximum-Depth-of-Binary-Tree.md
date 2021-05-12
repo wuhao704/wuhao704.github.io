@@ -1,6 +1,6 @@
 ---
 layout:	post
-title: LeetCode: 104. Maximum Depth of Binary Tree
+title: 'LeetCode: 104. Maximum Depth of Binary Tree'
 subtitle:
 date: 2020-04-15
 author: 吴昊

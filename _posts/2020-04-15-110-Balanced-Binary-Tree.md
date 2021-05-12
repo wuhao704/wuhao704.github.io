@@ -1,6 +1,6 @@
 ---
 layout:	post
-title: LeetCode: 110. Balanced Binary Tree
+title: 'LeetCode: 110. Balanced Binary Tree'
 subtitle:
 date: 2020-04-15
 author: 吴昊
