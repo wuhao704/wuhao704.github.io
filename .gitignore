@@ -35,4 +35,7 @@ Temporary Items
 _site
 
 # jekyll-cache
-.jekyll-cache/
+.jekyll-cache
+.idea
+
+Gemfile.lock
